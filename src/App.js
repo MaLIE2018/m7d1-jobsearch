@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect, useState} from 'react';
+import {Route, withRouter} from "react-router-dom"
+import Home from "./components/home/Home.jsx"
+import Company from "./components/company/CompanyDetails.jsx"
+import {Col, Container, Row, InputGroup, FormControl} from "react-bootstrap"
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
+import SearchBar from './components/SearchBar.jsx';
 
-function App() {
+const queryClient = new QueryClient();
+
+function App(props) {
+  const [queryWord, setQueryWord] = useState("Software")
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <QueryClientProvider client={queryClient}>
+    <Container>
+    <SearchBar queryWord={queryWord} setQueryWord={setQueryWord} history={props.history}/>
+    <Route exact path="/" render={(routerProps) => <Home queryWord={queryWord}/>}/>
+    <Route exact path="/company/:company_name" render={(routerProps) => <Company {...routerProps}/>}/>
+    </Container>
+    <ReactQueryDevtools initialIsOpen />
+    </QueryClientProvider>
   );
 }
 
-export default App;
+export default withRouter(App);

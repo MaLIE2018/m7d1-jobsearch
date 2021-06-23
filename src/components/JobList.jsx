@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import JobItem from "./JobItem";
 
 const JobList = ({ jobs }) => {
-  const favs = useSelector((state) => state.favorites.favorites);
+  const favs = useSelector((state) => state.favorites);
   return (
     <ListGroup>
       {jobs ? (

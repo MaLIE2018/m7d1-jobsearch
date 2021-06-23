@@ -3,7 +3,7 @@ import { Col, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import JobList from "../JobList";
 const Favs = (props) => {
-  const data = useSelector((state) => state.favorites);
+  const favorites = useSelector((state) => state.favorites);
   return (
     <>
       <Row>
@@ -13,7 +13,7 @@ const Favs = (props) => {
       </Row>
       <Row>
         <Col>
-          <JobList jobs={data.favorites} />
+          <JobList jobs={favorites} />
         </Col>
       </Row>
     </>

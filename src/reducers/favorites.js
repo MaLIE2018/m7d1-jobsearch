@@ -1,14 +1,12 @@
-const initialState = {
-  favorites: []
-}
+const initialState = []
 
 const favoriteReducer = (state =initialState, action) => {
       switch(action.type) {
         case "ADD_FAVORITE":
-          return {...state, favorites: [...state.favorites, action.payload]}
+          return [...state, action.payload]
         case "REMOVE_FAVORITE":
-          let newFavs = state.favorites.filter(f => f.id !== action.payload)
-          return {...state, favorites: newFavs}
+          let newFavs = state.filter(f => f.id !== action.payload)
+          return [...newFavs]
         default:
           return state
       }

@@ -31,8 +31,9 @@ const CompanyDetails = ({ match, history }) => {
   return (
     <>
       <Row>
-        {" "}
-        <Button onClick={() => history.go(-1)}>Go Back</Button>
+        <Col>
+          <h1>Company</h1>
+        </Col>
       </Row>
       <Row>
         <Col>

@@ -32,11 +32,18 @@ const Home = ({ category }) => {
     );
 
   return (
-    <Row>
-      <Col>
-        <JobList jobs={data.jobs} />
-      </Col>
-    </Row>
+    <>
+      <Row>
+        <Col>
+          <h1>Jobs</h1>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <JobList jobs={data.jobs} />
+        </Col>
+      </Row>
+    </>
   );
 };
 

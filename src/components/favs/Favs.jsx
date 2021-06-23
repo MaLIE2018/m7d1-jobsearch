@@ -12,7 +12,9 @@ const Favs = (props) => {
         </Col>
       </Row>
       <Row>
-        <JobList jobs={data.favorites} />
+        <Col>
+          <JobList jobs={data.favorites} />
+        </Col>
       </Row>
     </>
   );

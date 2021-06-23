@@ -1,18 +1,22 @@
-import React from "react";
-import { Row, Spinner, Col } from "react-bootstrap";
+import React, { useState } from "react";
+import { Row, Spinner, Col, Pagination } from "react-bootstrap";
 import { useQuery } from "react-query";
 import { useSelector } from "react-redux";
 import JobList from "../JobList";
 const Home = ({ category }) => {
   const searchWord = useSelector((state) => state.searchWord);
+  const [offset, setOffset] = useState(0);
 
   const { isLoading, error, data, isFetching } = useQuery(
-    ["jobs", searchWord],
+    ["jobs", searchWord, offset],
     () =>
-      fetch("https://fake-careers.herokuapp.com?search=" + searchWord).then(
-        (res) => res.json()
-      ),
-    { refetchOnWindowFocus: false }
+      fetch(
+        "https://fake-careers.herokuapp.com?search=" +
+          searchWord +
+          "&offset=" +
+          offset
+      ).then((res) => res.json()),
+    { refetchOnWindowFocus: false, keepPreviousData: true, staleTime: 5000 }
   );
 
   if (isLoading) {
@@ -42,6 +46,17 @@ const Home = ({ category }) => {
         <Col>
           <JobList jobs={data.jobs} />
         </Col>
+      </Row>
+      <Row className='mt-4 d-flex justify-content-center'>
+        <Pagination>
+          {Array.from({ length: Math.ceil(data.num_jobs / 10) }).map((v, i) => {
+            return (
+              <Pagination.Item key={i} onClick={() => setOffset(i * 10)}>
+                {i}
+              </Pagination.Item>
+            );
+          })}
+        </Pagination>
       </Row>
     </>
   );

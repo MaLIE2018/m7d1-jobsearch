@@ -3,11 +3,12 @@ import { Col, ListGroup, Row, Image, Button } from "react-bootstrap";
 import { Link, withRouter } from "react-router-dom";
 import ShowMoreText from "react-show-more-text";
 import differenceInDays from "date-fns/differenceInDays";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 const JobItem = (props) => {
   const executeOnClick = (isExpanded) => {
     console.log(isExpanded);
   };
+
   const { job } = props;
   const dispatch = useDispatch();
   return (
@@ -25,10 +26,11 @@ const JobItem = (props) => {
           ) : (
             <Button
               variant='light'
+              disabled={props.fav}
               onClick={() => {
                 dispatch({ type: "ADD_FAVORITE", payload: job });
               }}>
-              Add to Favorites
+              {!props.fav ? "Add to Favorites" : "Added"}
             </Button>
           )}
         </Col>

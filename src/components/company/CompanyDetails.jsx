@@ -1,16 +1,16 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Button, Col, Row, Spinner } from "react-bootstrap";
 import { useQuery } from "react-query";
 import JobList from "../JobList";
 const CompanyDetails = ({ match, history }) => {
-  const { isLoading, error, data, isFetching } = useQuery("company", () =>
-    fetch(
-      "https://remotive.io/api/remote-jobs?company_name=" +
-        match.params.company_name
-    ).then((res) => res.json())
+  const { isLoading, error, data, isFetching } = useQuery(
+    ["company", match.params.company_name],
+    () =>
+      fetch(
+        "https://remotive.io/api/remote-jobs?company_name=" +
+          match.params.company_name
+      ).then((res) => res.json())
   );
-
-  useEffect(() => {}, []);
 
   if (isLoading) {
     return (

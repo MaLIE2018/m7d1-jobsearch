@@ -1,13 +1,15 @@
 import React from "react";
 import { Row, Spinner, Col } from "react-bootstrap";
 import { useQuery } from "react-query";
-
+import { useSelector } from "react-redux";
 import JobList from "../JobList";
-const Home = ({ queryWord, category }) => {
+const Home = ({ category }) => {
+  const searchWord = useSelector((state) => state.searchWord);
+
   const { isLoading, error, data, isFetching } = useQuery(
-    ["jobs", queryWord],
+    ["jobs", searchWord],
     () =>
-      fetch("https://remotive.io/api/remote-jobs?search=" + queryWord).then(
+      fetch("https://fake-careers.herokuapp.com?search=" + searchWord).then(
         (res) => res.json()
       ),
     { refetchOnWindowFocus: false }

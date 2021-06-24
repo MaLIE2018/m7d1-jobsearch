@@ -1,9 +1,9 @@
 import React from "react";
-import { Button, Col, Row, Spinner } from "react-bootstrap";
+import { Col, Row, Spinner } from "react-bootstrap";
 import { useQuery } from "react-query";
 import JobList from "../JobList";
 const CompanyDetails = ({ match, history }) => {
-  const { isLoading, error, data, isFetching } = useQuery(
+  const { isLoading, error, data } = useQuery(
     ["company", match.params.company_name],
     () =>
       fetch(

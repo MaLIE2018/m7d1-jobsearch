@@ -2,7 +2,8 @@ import React from "react";
 import { Col, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import JobList from "../JobList";
-const Favs = (props) => {
+
+const Favs = () => {
   const favorites = useSelector((state) => state.favorites);
   return (
     <>

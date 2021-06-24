@@ -1,7 +1,12 @@
 import allReducers from '../reducers/index.js'
-import {createStore} from "redux"
+import {applyMiddleware, createStore} from "redux"
+import {compose} from "redux"
+import thunk from "redux-thunk"
+//compose to join middleware
 
-const store = createStore(allReducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+
+const store = createStore(allReducers, composeEnhancers(applyMiddleware(thunk)));
 
 
 export default store
